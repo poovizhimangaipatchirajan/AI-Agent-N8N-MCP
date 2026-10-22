@@ -1,0 +1,183 @@
+{
+  "name": "MCP Client",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        -544,
+        0
+      ],
+      "id": "40d986a5-6b1c-4619-acc8-1bbae8df4560",
+      "name": "When chat message received",
+      "webhookId": "660845ec-9c00-4b4a-9e2d-4c715acebd36"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -320,
+        0
+      ],
+      "id": "e72975d5-8a4a-4f82-b47d-fdef83ef94d3",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -464,
+        208
+      ],
+      "id": "88c412eb-38de-4b21-b971-68e849ddaae3",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "GxvrVccp7SeiE1UB",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        -320,
+        208
+      ],
+      "id": "de16d78c-ee57-4a9f-baed-7dccaab6d593",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://n8n-gt4s.srv2062361.hstgr.cloud/mcp/0b748b6d-b7a2-45ea-a14c-004d4786ea15",
+        "include": "selected",
+        "includeTools": [
+          "Calculator",
+          "Amazon_search_in_SerpApi",
+          "Send_a_message_in_Gmail"
+        ],
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.4,
+      "position": [
+        -208,
+        192
+      ],
+      "id": "c892d564-4bb7-4ae8-b6ff-2bac0c753e98",
+      "name": "MCP Client"
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://n8n-gt4s.srv2062361.hstgr.cloud/mcp-server/http",
+        "authentication": "mcpOAuth2Api",
+        "include": "selected",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.4,
+      "position": [
+        -16,
+        176
+      ],
+      "id": "cd2479c6-18fb-46bf-970f-aa022641c5dd",
+      "name": "MCP Client1",
+      "credentials": {
+        "mcpOAuth2Api": {
+          "id": "R3WwtTAs09g26x1S",
+          "name": "MCP"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true
+  },
+  "versionId": "38efbf68-9087-4908-b6c4-f2526e725016",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2b2f13f10e6d4e76bbf04ee6a1034020e8799751b37b00a8f0db863424fc3a2f"
+  },
+  "nodeGroups": [],
+  "id": "pAAtV3f0kEZYysda",
+  "tags": []
+}

@@ -1,0 +1,161 @@
+{
+  "name": "MCP Server",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "0b748b6d-b7a2-45ea-a14c-004d4786ea15"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "48a07488-101a-4ed9-82e7-de2d94c3a555",
+      "name": "MCP Server Trigger",
+      "webhookId": "0b748b6d-b7a2-45ea-a14c-004d4786ea15"
+    },
+    {
+      "parameters": {
+        "q": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Search_Query__q_', ``, 'string') }}",
+        "location": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Location__location_', ``, 'string') }}",
+        "additionalFields": {},
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-serpapi.serpApiTool",
+      "typeVersion": 1,
+      "position": [
+        -464,
+        176
+      ],
+      "id": "1ac7b203-6bb9-4174-b07f-b249d60032ea",
+      "name": "Google search in SerpApi",
+      "credentials": {
+        "serpApi": {
+          "id": "RY5zCmbWG4BUqZHO",
+          "name": "SerpApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "amazon",
+        "k": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Search_Query__k_', ``, 'string') }}",
+        "amazon_domain": "amazon.in",
+        "additionalFields": {},
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-serpapi.serpApiTool",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        208
+      ],
+      "id": "5f0de119-9387-4c47-b0c9-5c4779b6c336",
+      "name": "Amazon search in SerpApi",
+      "credentials": {
+        "serpApi": {
+          "id": "RY5zCmbWG4BUqZHO",
+          "name": "SerpApi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        208
+      ],
+      "id": "9067b77b-4361-4567-bc00-f22915f1d82d",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To', ``, 'string') }}",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.2,
+      "position": [
+        96,
+        208
+      ],
+      "id": "e90cd400-8cf8-4966-b97a-203c3a313080",
+      "name": "Send a message in Gmail",
+      "webhookId": "91661f60-499f-400a-a703-ff9a1875af3e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "6NxgYr2QzKpQW5Qh",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google search in SerpApi": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Amazon search in SerpApi": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message in Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true
+  },
+  "versionId": "fa9c202a-37f8-4393-99c1-4c556fe1d0bc",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2b2f13f10e6d4e76bbf04ee6a1034020e8799751b37b00a8f0db863424fc3a2f"
+  },
+  "nodeGroups": [],
+  "id": "jqiRfK5B2PRHwgHE",
+  "tags": []
+}
